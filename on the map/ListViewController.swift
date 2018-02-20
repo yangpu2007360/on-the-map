@@ -1,11 +1,11 @@
 //
-//  ListViewControllerTableViewController.swift
+//  ListViewController.swift
 //  on the map
 //
-//  Created by pu yang on 2/19/18.
+//  Created by pu yang on 2/20/18.
 //  Copyright © 2018 pu yang. All rights reserved.
 //
-import Foundation
+
 import UIKit
 
 class ListViewController: UITableViewController {
@@ -19,7 +19,7 @@ class ListViewController: UITableViewController {
         getStudentLocations()
         self.tableView.reloadData()
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StudentArray.sharedInstance.myArray.count
     }
@@ -27,6 +27,7 @@ class ListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")! as UITableViewCell
+        
         let studentLocation = StudentArray.sharedInstance.myArray[indexPath.row]
         
         cell.imageView!.image = UIImage(named: "pinIcon")
@@ -64,27 +65,6 @@ class ListViewController: UITableViewController {
             }
         }
     }
-    
-    func getStudentLocations() {
-        
-        ParseClientAPI.sharedInstance().getStudentLocations() { (results, errorString) in
-            
-            performUIUpdatesOnMain {
-                if (results != nil) {
-                    self.tableView.reloadData()
-                    
-                } else {
-                    self.errorAlert(errorString!)
-                }
-            }
-        }
-    }
-    
-    func errorAlert(_ errorString: String) {
-        let alertController = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
 
     @IBAction func logOutButton(_ sender: Any) {
         
@@ -100,11 +80,11 @@ class ListViewController: UITableViewController {
                 }
             }
         }
-        
     }
     
+
     @IBAction func addOrChangePin(_ sender: Any) {
-     
+        
         if userData.objectId == "" {
             
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "PostingNavController")
@@ -136,12 +116,39 @@ class ListViewController: UITableViewController {
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-        
     }
     
     @IBAction func reloadButton(_ sender: Any) {
+        
         getStudentLocations()
         print("Success! Downloaded Student Locations")
+        
     }
+    
+    func errorAlert(_ errorString: String) {
+        let alertController = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func getStudentLocations() {
+        
+        ParseClientAPI.sharedInstance().getStudentLocations() { (results, errorString) in
+            
+            performUIUpdatesOnMain {
+                if (results != nil) {
+                    self.tableView.reloadData()
+                    
+                } else {
+                    self.errorAlert(errorString!)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
 }

@@ -1,11 +1,3 @@
-//
-//  LocationData.swift
-//  On The Map
-//
-//  Created by Garrett Cone on 2/21/17.
-//  Copyright © 2017 Garrett Cone. All rights reserved.
-//
-
 import Foundation
 import UIKit
 

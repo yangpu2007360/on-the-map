@@ -1,11 +1,3 @@
-//
-//  StudentArray.swift
-//  On The Map
-//
-//  Created by Garrett Cone on 2/13/17.
-//  Copyright © 2017 Garrett Cone. All rights reserved.
-//
-
 import Foundation
 import UIKit
 

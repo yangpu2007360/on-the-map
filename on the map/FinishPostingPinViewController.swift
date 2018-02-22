@@ -17,6 +17,7 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    
     @IBOutlet weak var finishButton: UIButton!
     
     override func viewDidLoad() {

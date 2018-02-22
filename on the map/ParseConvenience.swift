@@ -1,10 +1,3 @@
-//
-//  ParseConvenience.swift
-//  On The Map
-//
-//  Created by Garrett Cone on 2/28/17.
-//  Copyright © 2017 Garrett Cone. All rights reserved.
-//
 
 import Foundation
 import UIKit

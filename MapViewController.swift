@@ -26,7 +26,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     
-    
     @IBAction func logOutButton(_ sender: Any) {
         
         UdacityClientAPI.sharedInstance().goLogout() { (success, errorString) in

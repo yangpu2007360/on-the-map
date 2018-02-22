@@ -306,6 +306,9 @@
                                     <action selector="findLocation:" destination="PMO-A3-Rwh" eventType="touchUpInside" id="HjZ-9c-Uc6"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="sz9-ir-h2a">
+                                <rect key="frame" x="177" y="397" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -319,6 +322,8 @@
                             <constraint firstItem="hfM-hc-Nze" firstAttribute="bottom" secondItem="tRP-V2-LaY" secondAttribute="bottom" constant="278" id="Q5L-CQ-Gef"/>
                             <constraint firstItem="j4L-Ho-Dch" firstAttribute="leading" secondItem="0TE-gS-TG0" secondAttribute="leading" id="Rvd-nc-3PG"/>
                             <constraint firstItem="j4L-Ho-Dch" firstAttribute="leading" secondItem="hfM-hc-Nze" secondAttribute="leading" constant="81" id="U8a-65-j1X"/>
+                            <constraint firstItem="sz9-ir-h2a" firstAttribute="top" secondItem="tRP-V2-LaY" secondAttribute="bottom" constant="8" id="buF-lM-TcH"/>
+                            <constraint firstItem="sz9-ir-h2a" firstAttribute="centerX" secondItem="tRP-V2-LaY" secondAttribute="centerX" id="j1l-ge-Wk4"/>
                             <constraint firstItem="tRP-V2-LaY" firstAttribute="top" secondItem="0TE-gS-TG0" secondAttribute="bottom" constant="8" symbolic="YES" id="mCv-Bv-OCw"/>
                             <constraint firstItem="Ane-tm-Rwe" firstAttribute="centerX" secondItem="j4L-Ho-Dch" secondAttribute="centerX" id="mLD-hH-9dM"/>
                             <constraint firstItem="j4L-Ho-Dch" firstAttribute="trailing" secondItem="0TE-gS-TG0" secondAttribute="trailing" id="vla-Wb-Njw"/>
@@ -333,6 +338,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="sz9-ir-h2a" id="Djh-Lb-fKe"/>
                         <outlet property="enterLocationTextField" destination="j4L-Ho-Dch" id="MbW-yK-1Db"/>
                         <outlet property="enterWebsiteTextField" destination="0TE-gS-TG0" id="2dp-Wb-Bsz"/>
                         <outlet property="findLocationButton" destination="tRP-V2-LaY" id="E8r-6h-AMB"/>
@@ -447,6 +453,6 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rjq-kN-jlO"/>
+        <segue reference="QrM-e2-eHw"/>
     </inferredMetricsTieBreakers>
 </document>

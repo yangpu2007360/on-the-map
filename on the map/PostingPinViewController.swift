@@ -12,6 +12,16 @@ import MapKit
 
 class PostingPinViewController: UIViewController, UITextFieldDelegate {
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.activityIndicator.isHidden = true
+    }
+    
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var enterLocationTextField: UITextField!
     
     @IBOutlet weak var enterWebsiteTextField: UITextField!
@@ -19,19 +29,22 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var findLocationButton: UIButton!
     
     @IBAction func findLocation(_ sender: Any) {
-        
+        self.activityIndicator.isHidden = false
         LocationData.enteredLocation = self.enterLocationTextField.text!
         LocationData.enteredWebsite = self.enterWebsiteTextField.text!
         
         if enterLocationTextField.text!.isEmpty || enterWebsiteTextField.text!.isEmpty {
             errorAlert("Location or Website fields Empty")
         } else {
+            activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
             
             getMyLocation() { (success, errorString) in
                 
                 if (success) {
                     print("Successfully set your location data")
-                    
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "FinishPostingPinViewController")
                     self.present(controller, animated: true, completion: nil)
                     
@@ -94,7 +107,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelAction(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
-        
+    
     }
     
     

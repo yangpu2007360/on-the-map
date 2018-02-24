@@ -53,7 +53,6 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
         }
         
         
-        
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -88,7 +87,7 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
                         } else {
                             completionHandler(false)
                             print("Failed to POST: \(errorString)")
-                            
+                            self.errorAlert("Could not Post New Student Location")
                             self.dismiss(animated: true, completion: nil)
                         }
                     }
@@ -145,6 +144,12 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(1, 1))
         mapView.setRegion(region, animated: true)
         
+    }
+    
+    func errorAlert(_ errorString: String) {
+        let alertController = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     

@@ -42,7 +42,7 @@ class ListViewController: UITableViewController {
         
         let locationInfo = StudentArray.sharedInstance.myArray[indexPath.row]
         let locationToLoad = locationInfo.mediaURL
-        
+    
         if locationToLoad.range(of: "http") != nil {
             
             UIApplication.shared.open(URL(string: "\(locationToLoad)")!, options: [:]) { (success) in
@@ -146,7 +146,7 @@ class ListViewController: UITableViewController {
         }
     }
     
-    
+
     
     
     

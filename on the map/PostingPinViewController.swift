@@ -17,6 +17,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.activityIndicator.isHidden = true
+        self.activityIndicator.hidesWhenStopped = true
     }
     
     
@@ -44,12 +45,13 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
                 if (success) {
                     print("Successfully set your location data")
                     self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+                    
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "FinishPostingPinViewController")
                     self.present(controller, animated: true, completion: nil)
                     
                 } else {
                     
+                    self.activityIndicator.stopAnimating()
                     performUIUpdatesOnMain {
                         self.setUIEnabled(false)
                         self.errorAlert(errorString!)

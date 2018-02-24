@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -22,8 +22,13 @@ class ViewController: UIViewController {
         // Get the app delegate
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        self.emailTextField.delegate = self as? UITextFieldDelegate
-        self.passwordTextField.delegate = self as? UITextFieldDelegate
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func loginPressed(_ sender: Any) {
@@ -55,7 +60,7 @@ class ViewController: UIViewController {
     
     private func completeLogin() {
         performUIUpdatesOnMain {
-//            self.setUIEnabled(true)
+            
             let controller = self.storyboard!.instantiateViewController(withIdentifier: "StudentLocationTabBarController") as! UITabBarController
             self.present(controller, animated: true, completion: nil)
         }

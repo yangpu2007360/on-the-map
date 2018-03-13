@@ -15,7 +15,7 @@ extension ParseClientAPI {
             Constants.JSONBodyKeys.MapString: mapString as AnyObject
         ]
         
-        let _ = taskForParsePUTMethod(Constants.Methods.LocationWithSlash, objectId: userData.objectId, jsonBody: jsonBody) { (JSONResult, error) in
+        let _ = taskForParsePUTMethod("StudentLocation/", objectId: userData.objectId, jsonBody: jsonBody) { (JSONResult, error) in
             
             if let error = error {
                 print(error)
@@ -38,11 +38,11 @@ extension ParseClientAPI {
     func getStudentLocations(_ completionHandler: @escaping (_ results: [StudentLocation]?, _ errorString: String?) -> Void) {
         
         let parameters: [String: AnyObject] = [
-            Constants.OTMParameterKeys.limit: 100 as AnyObject,
-            Constants.OTMParameterKeys.order: "-updatedAt" as AnyObject
+            "limit": 100 as AnyObject,
+            "order": "-updatedAt" as AnyObject
         ]
         
-        let _ = taskForParseGETMethod(Constants.Methods.Location, parameters: parameters) { (JSONResult, error) in
+        let _ = taskForParseGETMethod("StudentLocation", parameters: parameters) { (JSONResult, error) in
             
             if let error = error {
                 print(error)
@@ -64,10 +64,10 @@ extension ParseClientAPI {
         
         let parameters: [String: AnyObject] = [
             
-            Constants.OTMParameterKeys.queryWhere: uniqueKey as AnyObject
+            "where": uniqueKey as AnyObject
         ]
         
-        let _ = getStudentLocationFromParse(Constants.Methods.Location, parameters: parameters) { (JSONResult, error) in
+        let _ = getStudentLocationFromParse("StudentLocation", parameters: parameters) { (JSONResult, error) in
             
             if let error = error {
                 print("\t\(error)")
@@ -125,7 +125,7 @@ extension ParseClientAPI {
                 ]
                 
                 print("\nIn postNewStudentLocation, jsonBody: \(jsonBody)")
-                let _ = self.taskForParsePOSTMethod(Constants.Methods.Location, jsonBody: jsonBody) { (JSONResult, error) in
+                let _ = self.taskForParsePOSTMethod("StudentLocation", jsonBody: jsonBody) { (JSONResult, error) in
                     
                     if let error = error {
                         print(error)

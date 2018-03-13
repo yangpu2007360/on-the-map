@@ -267,7 +267,7 @@
         <!--Add Location-->
         <scene sceneID="dQl-2z-gI1">
             <objects>
-                <viewController id="PMO-A3-Rwh" customClass="PostingPinViewController" customModule="on_the_map" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostingNavController" id="PMO-A3-Rwh" customClass="PostingPinViewController" customModule="on_the_map" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w90-bt-qjn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -412,7 +412,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="rhc-yr-lN2">
             <objects>
-                <tabBarController storyboardIdentifier="StudentLocationTabBarController" id="atI-Ad-Xch" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="atI-Ad-Xch" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pts-hG-TZe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -430,6 +430,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ti6-Zi-t2V">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qS7-8o-8gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vwt-gL-sve" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wn6-NN-LZz">
@@ -441,7 +442,6 @@
                         <segue destination="PMO-A3-Rwh" kind="relationship" relationship="rootViewController" id="ZK0-3Q-FZ5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qS7-8o-8gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3407" y="100"/>
         </scene>

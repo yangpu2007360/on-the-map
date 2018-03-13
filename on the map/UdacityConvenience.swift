@@ -16,11 +16,8 @@ extension UdacityClientAPI {
         
         self.postSessionID(username, password) { (success, errorString) in
             
-            if success == true {
-                completionHandlerForAuth(success, errorString)
-            } else {
-                completionHandlerForAuth(success, errorString)
-            }
+            completionHandlerForAuth(success, errorString)
+            
         }
     }
     
@@ -31,7 +28,7 @@ extension UdacityClientAPI {
             Constants.JSONBodyKeys.password: password as AnyObject
             ]]
         
-        let url = Constants.OTM.UdacityBaseURL + Constants.Methods.Session
+        let url = "https://www.udacity.com/api/" + "session"
         
         let _ = taskForUdacityPOSTMethod(url, parameters: parameters as [String: [String : AnyObject]]) { (JSONResult, error) in
             
@@ -92,7 +89,7 @@ extension UdacityClientAPI {
     
     func getPublicUserData(_ completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
-        let _ = taskForUdacityGETMethod(Constants.Methods.Users, userID: userData.userId, firstName: userData.firstName, lastName: userData.lastName) { (JSONResult, error) in
+        let _ = taskForUdacityGETMethod("users/", userID: userData.userId, firstName: userData.firstName, lastName: userData.lastName) { (JSONResult, error) in
             
             if let error = error {
                 print("\terror: \(error)")
@@ -136,9 +133,9 @@ extension UdacityClientAPI {
         }
     }
     
-    func goLogout(_ completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+    func Logout(_ completionHandler: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
         
-        let url = Constants.OTM.logOutBaseURL + Constants.Methods.ToDelete
+        let url = "https://www.udacity.com/api/" + "session"
         let _ = taskForDELETEMethod(url) { (JSONResult, error) in
             
             if let error = error {
@@ -150,6 +147,5 @@ extension UdacityClientAPI {
             }
         }
     }
-    
     
 }

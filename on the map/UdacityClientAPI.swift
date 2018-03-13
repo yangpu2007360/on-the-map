@@ -2,7 +2,7 @@
 //  UdacityClientAPI.swift
 //  on the map
 //
-//  Created by pu yang on 2/15/18.
+//  Created by pu yang on 3/08/18.
 //  Copyright © 2018 pu yang. All rights reserved.
 //
 import Foundation
@@ -36,7 +36,7 @@ class UdacityClientAPI: NSObject {
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             guard (error == nil) else {
-                print("There was an error with your Udacity POST request: \(String(describing: error))")
+                print("Error in Udacity POST request: \(String(describing: error))")
                 completionHandlerForPOST(nil, error! as NSError)
                 return
             }
@@ -47,7 +47,8 @@ class UdacityClientAPI: NSObject {
                 return
             }
             
-            // Parse the data and use the data(First skip the first 5 characters of the response (Security characters by Udacity))
+            // Parseand use the data
+            
             let range = Range(uncheckedBounds: (5, data.count))
             let newData = data.subdata(in: range)
             print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
@@ -63,8 +64,7 @@ class UdacityClientAPI: NSObject {
             if let errorString = parsedResult["error"] as? String {
                 print(errorString)
                 
-                let errorStr = "Invalid login credentials"
-                let error = NSError(domain: errorStr, code: 0, userInfo: [NSLocalizedDescriptionKey: errorString])
+                let error = NSError(domain: "Invalid login credentials", code: 0, userInfo: [NSLocalizedDescriptionKey: errorString])
                 
                 completionHandlerForPOST(nil, error as NSError)
                 return
@@ -79,19 +79,19 @@ class UdacityClientAPI: NSObject {
     
     func taskForUdacityGETMethod(_ method: String, userID: String, firstName: String, lastName: String, completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let urlString = Constants.OTM.UdacityBaseURL + method + userID
+        let urlString = "https://www.udacity.com/api/" + method + userID
         let url = URL(string: urlString)
         let request = NSMutableURLRequest(url: url!)
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             guard (error == nil) else {
-                print("There was an error with your Udacity POST request: \(String(describing: error))")
+                print("Error with Udacity POST request: \(String(describing: error))")
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!: \(String(describing: response) )")
+                print("status code other than 2xx!: \(String(describing: response) )")
                 return
             }
             
@@ -100,7 +100,7 @@ class UdacityClientAPI: NSObject {
                 return
             }
             
-            // Parse the data and use the data(First skip the first 5 characters of the response (Security characters by Udacity))
+            // Parse the data and use the data
             let range = Range(uncheckedBounds: (5, data.count))
             let newData = data.subdata(in: range)
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForGET)
@@ -135,12 +135,12 @@ class UdacityClientAPI: NSObject {
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
             guard (error == nil) else {
-                print("There was an error with your DELETE request: \(String(describing: error))")
+                print("error with your DELETE request: \(String(describing: error))")
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
+                print("a status code other than 2xx!")
                 return
             }
             

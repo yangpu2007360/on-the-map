@@ -12,15 +12,19 @@ class ParseClientAPI: NSObject {
     
     // Shared Session
     var session = URLSession.shared
+    let ParseApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+    let ParseApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+    let ApiKey = "X-Parse-REST-API-Key"
+    let ApplicationID = "X-Parse-Application-Id"
     
     func taskForParsePUTMethod(_ method: String, objectId: String, jsonBody: [String: AnyObject], completionHandlerForPUT: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let urlString = Constants.OTM.ParseBaseURL + method + objectId
+        let urlString = "https://parse.udacity.com/parse/classes/" + method + objectId
         let url = URL(string: urlString)!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "PUT"
-        request.addValue(Constants.OTM.ParseApplicationID, forHTTPHeaderField: Constants.OTMParameterKeys.ApplicationID)
-        request.addValue(Constants.OTM.ParseApiKey, forHTTPHeaderField: Constants.OTMParameterKeys.ApiKey)
+        request.addValue(ParseApplicationID, forHTTPHeaderField: ApplicationID)
+        request.addValue(ParseApiKey, forHTTPHeaderField: ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
@@ -52,12 +56,12 @@ class ParseClientAPI: NSObject {
     
     func taskForParsePOSTMethod(_ method: String, jsonBody: [String: AnyObject], completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
-        let urlString = Constants.OTM.ParseBaseURL + method
+        let urlString = "https://parse.udacity.com/parse/classes/" + method
         let url = URL(string: urlString)!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue(Constants.OTM.ParseApplicationID, forHTTPHeaderField: Constants.OTMParameterKeys.ApplicationID)
-        request.addValue(Constants.OTM.ParseApiKey, forHTTPHeaderField: Constants.OTMParameterKeys.ApiKey)
+        request.addValue(ParseApplicationID, forHTTPHeaderField: ApplicationID)
+        request.addValue(ParseApiKey, forHTTPHeaderField: ApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
@@ -91,8 +95,8 @@ class ParseClientAPI: NSObject {
         
         print("\t url: \(parseURLFromParametersForGET(parameters, withPathExtension: method))")
         let request = NSMutableURLRequest(url: parseURLFromParametersForGET(parameters, withPathExtension: method))
-        request.addValue(Constants.OTM.ParseApplicationID, forHTTPHeaderField: Constants.OTMParameterKeys.ApplicationID)
-        request.addValue(Constants.OTM.ParseApiKey, forHTTPHeaderField: Constants.OTMParameterKeys.ApiKey)
+        request.addValue(ParseApplicationID, forHTTPHeaderField: ApplicationID)
+        request.addValue(ParseApiKey, forHTTPHeaderField: ApiKey)
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
@@ -144,8 +148,8 @@ class ParseClientAPI: NSObject {
         print("\t url: \(parseURLFromParameters(parameters, withPathExtension: method))")
         let request = NSMutableURLRequest(url: parseURLFromParameters(parameters, withPathExtension: method))
         request.httpMethod = "GET"
-        request.addValue(Constants.OTM.ParseApplicationID, forHTTPHeaderField: Constants.OTMParameterKeys.ApplicationID)
-        request.addValue(Constants.OTM.ParseApiKey, forHTTPHeaderField: Constants.OTMParameterKeys.ApiKey)
+        request.addValue(ParseApplicationID, forHTTPHeaderField: ApplicationID)
+        request.addValue(ParseApiKey, forHTTPHeaderField: ApiKey)
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             
@@ -175,14 +179,14 @@ class ParseClientAPI: NSObject {
     private func parseURLFromParameters(_ parameters: [String: AnyObject], withPathExtension: String? = nil) -> URL {
 
         var components = URLComponents()
-        components.scheme = Constants.OTM.ParseScheme
-        components.host = Constants.OTM.ParseHost
-        components.path = Constants.OTM.ParsePath + (withPathExtension ?? "")
+        components.scheme = "https"
+        components.host = "parse.udacity.com"
+        components.path = "/parse/classes/" + (withPathExtension ?? "")
         components.queryItems = [URLQueryItem]()
 
         for (key, value) in parameters {
 
-            let queryItem = URLQueryItem(name: key, value: "{\"uniqueKey\":\"\(value)\"}") // {"uniqueKey":"1234"}
+            let queryItem = URLQueryItem(name: key, value: "{\"uniqueKey\":\"\(value)\"}") 
             components.queryItems!.append(queryItem)
         }
         return components.url!
@@ -205,9 +209,9 @@ class ParseClientAPI: NSObject {
     private func parseURLFromParametersForGET(_ parameters: [String: AnyObject], withPathExtension: String? = nil) -> URL {
         
         var components = URLComponents()
-        components.scheme = Constants.OTM.ParseScheme
-        components.host = Constants.OTM.ParseHost
-        components.path = Constants.OTM.ParsePath + (withPathExtension ?? "")
+        components.scheme = "https"
+        components.host = "parse.udacity.com"
+        components.path = "/parse/classes/" + (withPathExtension ?? "")
         components.queryItems = [URLQueryItem]()
         
         for (key, value) in parameters {

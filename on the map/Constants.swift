@@ -3,57 +3,6 @@ import UIKit
 
 struct Constants {
     
-    struct OTM {
-        
-        // API Key
-        static let ParseApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-        
-        // Application ID
-        static let ParseApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
-        
-        
-        // URLs
-        static let ParseBaseURL = "https://parse.udacity.com/parse/classes/"
-        static let ParseScheme = "https"
-        static let ParseHost = "parse.udacity.com"
-        static let ParsePath = "/parse/classes/"
-        
-        static let queryValue = "1234"
-        
-        static let UdacityBaseURL = "https://www.udacity.com/api/"
-        static let logOutBaseURL = "https://www.udacity.com/api/"
-        static let signUpURL = "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated"
-    }
-    
-    struct Methods {
-        
-        // GETing or POSTing a location
-        static let Location = "StudentLocation"
-        static let LocationWithSlash = "StudentLocation/"
-        // Udacity Authentication
-        static let Session = "session"
-        
-        static let ToDelete = "session"
-        
-        // Users
-        static let Users = "users/"
-        
-        // Public User Data
-        static let AuthenticationTokenNew = "authentication/token/new"
-        
-    }
-    
-    struct OTMParameterKeys {
-        
-        static let ApiKey = "X-Parse-REST-API-Key"
-        static let ApplicationID = "X-Parse-Application-Id"
-        static let uniqueKey = "uniqueKey"
-        static let limit = "limit"
-        static let skip = "skip"
-        static let order = "order"
-        static let queryWhere = "where"
-    }
-    
     struct JSONBodyKeys {
         static let udacity = "udacity"
         static let username = "username"

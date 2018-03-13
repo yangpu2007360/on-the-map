@@ -2,7 +2,7 @@
 //  PostingPinViewController.swift
 //  on the map
 //
-//  Created by pu yang on 2/19/18.
+//  Created by pu yang on 3/08/18.
 //  Copyright © 2018 pu yang. All rights reserved.
 //
 
@@ -12,10 +12,8 @@ import MapKit
 
 class PostingPinViewController: UIViewController, UITextFieldDelegate {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.activityIndicator.isHidden = true
         self.activityIndicator.hidesWhenStopped = true
     }
@@ -35,7 +33,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
         LocationData.enteredWebsite = self.enterWebsiteTextField.text!
         
         if enterLocationTextField.text!.isEmpty || enterWebsiteTextField.text!.isEmpty {
-            errorAlert("Location or Website fields Empty")
+            errorAlert("Please enter location and Website fields")
         } else {
             activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
@@ -43,7 +41,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
             getMyLocation() { (success, errorString) in
                 
                 if (success) {
-                    print("Successfully set your location data")
+                    print("Successfully get your location data")
                     self.activityIndicator.stopAnimating()
                     
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "FinishPostingPinViewController")
@@ -53,10 +51,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
                     
                     self.activityIndicator.stopAnimating()
                     performUIUpdatesOnMain {
-                        self.setUIEnabled(false)
                         self.errorAlert(errorString!)
-                        self.setUIEnabled(true)
-
                     }
                 }
             }
@@ -73,7 +68,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
                 print(Thread.isMainThread)
                 
                 if let error = error {
-                    print("Could not geocode the entered location: \(error)")
+                    print("Could not get the entered location: \(error)")
                     completionHandler(false, error.localizedDescription)
                     return
                 }
@@ -106,7 +101,7 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction func cancelPressed(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
     
@@ -125,16 +120,4 @@ class PostingPinViewController: UIViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func setUIEnabled(_ enabled: Bool) {
-        enterLocationTextField.isEnabled = enabled
-        enterWebsiteTextField.isEnabled = enabled
-        findLocationButton.isEnabled = enabled
-        
-        // adjust login button alpha
-        if enabled {
-            findLocationButton.alpha = 1.0
-        } else {
-            findLocationButton.alpha = 0.5
-        }
-    }
 }

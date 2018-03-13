@@ -2,7 +2,7 @@
 //  FinishPostingPinViewController.swift
 //  on the map
 //
-//  Created by pu yang on 2/19/18.
+//  Created by pu yang on 3/8/18.
 //  Copyright © 2018 pu yang. All rights reserved.
 //
 
@@ -26,8 +26,8 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
         self.loadMap()
         
         self.mapView.delegate = self
-        finishButton.layer.cornerRadius = 5
-        finishButton.clipsToBounds = true
+//        finishButton.layer.cornerRadius = 5
+//        finishButton.clipsToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +42,7 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
             
             if (success) {
                 performUIUpdatesOnMain {
-                    print("Successfully finalized my location")
+                    print("Successfully posted your location")
                 }
             } else {
                 
@@ -79,7 +79,7 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
                             completionHandler(true)
                             
                             // If successful, go on to the next view
-                            let controller = self.storyboard!.instantiateViewController(withIdentifier: "StudentLocationTabBarController") as! UITabBarController
+                            let controller = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                             self.present(controller, animated: true, completion: nil)
                             
                             print("\tSuccessful POSTing new student location")
@@ -100,7 +100,7 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
                         completionHandler(true)
                         
                         // If successful, go on to the next view
-                        let controller = self.storyboard!.instantiateViewController(withIdentifier: "StudentLocationTabBarController") as! UITabBarController
+                        let controller = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                         self.present(controller, animated: true, completion: nil)
                         
                         print("\tSuccessful PUTing new student location")
@@ -114,7 +114,19 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
+    
+    func loadMap() {
+        
+        let lat = CLLocationDegrees(LocationData.latitude as Double)
+        let long = CLLocationDegrees(LocationData.longitude as Double)
+        
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        self.coordinate = coordinate
+        let region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(1, 1))
+        mapView.setRegion(region, animated: true)
+        
+    }
     
     func setAnnotations() {
         
@@ -131,19 +143,6 @@ class FinishPostingPinViewController: UIViewController, MKMapViewDelegate {
         annotations.append(annotation)
         
         self.mapView.addAnnotations(annotations)
-    }
-    
-    func loadMap() {
-        
-        let lat = CLLocationDegrees(LocationData.latitude as Double)
-        let long = CLLocationDegrees(LocationData.longitude as Double)
-        
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        
-        self.coordinate = coordinate
-        let region = MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(1, 1))
-        mapView.setRegion(region, animated: true)
-        
     }
     
     func errorAlert(_ errorString: String) {

@@ -219,19 +219,19 @@
                                     <navigationItem title="On The Map" id="HYa-ZP-rcm" userLabel="On The Map">
                                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="oKS-6R-NPb">
                                             <connections>
-                                                <action selector="logOutButton:" destination="TF9-ip-fKh" id="ayo-1l-Xc2"/>
+                                                <action selector="logOutPressed:" destination="TF9-ip-fKh" id="Jm3-ga-bUp"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="add" id="wII-cy-SJg">
                                                 <connections>
-                                                    <action selector="addOrChangePin:" destination="TF9-ip-fKh" id="Dr1-mC-p7h"/>
+                                                    <action selector="addPinPressed:" destination="TF9-ip-fKh" id="z1b-tB-oEI"/>
                                                     <segue destination="Vwt-gL-sve" kind="presentation" id="QrM-e2-eHw"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem systemItem="refresh" id="K3G-d4-FUV">
                                                 <connections>
-                                                    <action selector="reloadButton:" destination="TF9-ip-fKh" id="O3C-Pv-sZO"/>
+                                                    <action selector="reloadPressed:" destination="TF9-ip-fKh" id="XhB-y0-uoc"/>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>
@@ -430,7 +430,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Ti6-Zi-t2V">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qS7-8o-8gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vwt-gL-sve" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wn6-NN-LZz">
@@ -442,6 +441,7 @@
                         <segue destination="PMO-A3-Rwh" kind="relationship" relationship="rootViewController" id="ZK0-3Q-FZ5"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qS7-8o-8gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3407" y="100"/>
         </scene>
